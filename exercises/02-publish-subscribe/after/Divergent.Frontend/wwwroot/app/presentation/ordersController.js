@@ -29,7 +29,7 @@
                         }]
                     };
 
-                    return $http.post(config.salesApiUrl + '/orders/createOrder', payload)
+                    return $http.post(config.gatewayBaseUrl + '/orders/', payload)
                         .then(function (createOrderResponse) {
                             $log.debug('raw order created:', createOrderResponse.data);
 

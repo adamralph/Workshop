@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -30,9 +31,9 @@ namespace ITOps.ViewModelComposition
 
                 var pendingTasks = new List<Task>();
 
-                foreach (var appender in interceptors.OfType<IViewModelAppender>())
+                foreach (var processor in interceptors.OfType<IViewModelProcessor>())
                 {
-                    pendingTasks.Add(appender.Append(viewModel, routeData, context.Request.Query).WithLogging(() => loggerFactory.CreateLogger(appender.GetType())));
+                    pendingTasks.Add(processor.Process(viewModel, routeData, context.Request.Query).WithLogging(() => loggerFactory.CreateLogger(processor.GetType())));
                 }
 
                 if (!pendingTasks.Any())
@@ -50,6 +51,30 @@ namespace ITOps.ViewModelComposition
             {
                 viewModel.ClearSubscriptions();
             }
+        }
+
+        public static async Task<int> HandlePostRequest(HttpContext context)
+        {
+            var loggerFactory = context.RequestServices.GetService<ILoggerFactory>();
+            var viewModel = new DynamicViewModel(context.GetRouteData(), context.Request.Query, loggerFactory);
+            var routeData = context.GetRouteData();
+
+            var processors = context.RequestServices.GetServices<IViewModelProcessor>()
+                .Where(interceptor => interceptor.Matches(routeData, HttpMethods.Post))
+                .ToList();
+
+            if (!processors.Any())
+            {
+                return StatusCodes.Status404NotFound;
+            }
+
+            var processingTasks = processors.Select(processor =>
+                processor.Process(viewModel, routeData, context.Request.Query)
+                    .WithLogging(() => loggerFactory.CreateLogger(processor.GetType())));
+
+            await Task.WhenAll(processingTasks);
+
+            return StatusCodes.Status202Accepted;
         }
     }
 }

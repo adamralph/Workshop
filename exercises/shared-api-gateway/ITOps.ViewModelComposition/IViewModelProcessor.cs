@@ -4,8 +4,8 @@ using System.Threading.Tasks;
 
 namespace ITOps.ViewModelComposition
 {
-    public interface IViewModelAppender : IRouteInterceptor
+    public interface IViewModelProcessor : IRouteInterceptor
     {
-        Task Append(dynamic viewModel, RouteData routeData, IQueryCollection query);
+        Task Process(dynamic viewModel, RouteData routeData, IQueryCollection query);
     }
 }

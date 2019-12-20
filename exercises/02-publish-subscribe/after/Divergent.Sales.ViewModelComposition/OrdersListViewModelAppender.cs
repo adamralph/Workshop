@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace Divergent.Sales.ViewModelComposition
 {
-    public class OrdersListViewModelAppender : IViewModelAppender
+    public class OrdersListViewModelAppender : IViewModelProcessor
     {
         public bool Matches(RouteData routeData, string httpMethod) =>
             HttpMethods.IsGet(httpMethod)
                 && string.Equals((string)routeData.Values["controller"], "orders", StringComparison.OrdinalIgnoreCase)
                 && !routeData.Values.ContainsKey("id");
 
-        public async Task Append(dynamic viewModel, RouteData routeData, IQueryCollection query)
+        public async Task Process(dynamic viewModel, RouteData routeData, IQueryCollection query)
         {
             // Hardcoded for simplicity. In a production app, a config object could be injected.
             var url = $"http://localhost:20185/api/orders";

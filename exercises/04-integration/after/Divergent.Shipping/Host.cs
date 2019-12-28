@@ -22,13 +22,7 @@ namespace Divergent.Shipping
             try
             {
                 var endpointConfiguration = new EndpointConfiguration(EndpointName)
-                    .Configure(
-                        routing =>
-                        {
-
-                            // TODO
-                            routing.RouteToEndpoint(typeof(ShipWithFedexCommand), "Divergent.ITOps");
-                        });
+                    .Configure();
 
                 endpoint = await Endpoint.Start(endpointConfiguration);
             }

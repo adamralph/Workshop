@@ -10,8 +10,7 @@ namespace ITOps.EndpointConfig
         static readonly ILog Log = LogManager.GetLogger(typeof(EndpointConfigurationExtensions));
 
         public static EndpointConfiguration Configure(
-            this EndpointConfiguration endpointConfiguration,
-            Action<RoutingSettings<LearningTransport>> configureRouting)
+            this EndpointConfiguration endpointConfiguration)
         {
             Log.Info("Configuring endpoint...");
 
@@ -34,8 +33,6 @@ namespace ITOps.EndpointConfig
             conventions.DefiningEventsAs(t => t.Namespace != null && t.Namespace.StartsWith("Divergent") && t.Namespace.EndsWith("Events") && t.Name.EndsWith("Event"));
 
             endpointConfiguration.EnableInstallers();
-
-            configureRouting?.Invoke(routing);
 
             return endpointConfiguration;
         }

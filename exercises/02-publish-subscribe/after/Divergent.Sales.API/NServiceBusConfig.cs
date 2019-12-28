@@ -21,6 +21,7 @@ namespace Divergent.Sales.API
             var transport = config.UseTransport<LearningTransport>();
 
             var routing = transport.Routing();
+
             routing.RouteToEndpoint(typeof(SubmitOrderCommand), "Divergent.Sales");
 
             config.UseSerialization<NewtonsoftSerializer>();

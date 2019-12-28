@@ -11,7 +11,7 @@ namespace ITOps.EndpointConfig
 
         public static EndpointConfiguration Configure(
             this EndpointConfiguration endpointConfiguration,
-            Action<RoutingSettings<LearningTransport>> configureRouting = null)
+            Action<RoutingSettings<LearningTransport>> configureRouting)
         {
             Log.Info("Configuring endpoint...");
 

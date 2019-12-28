@@ -25,6 +25,8 @@ namespace Divergent.Shipping
                     .Configure(
                         routing =>
                         {
+
+                            // TODO
                             routing.RouteToEndpoint(typeof(ShipWithFedexCommand), "Divergent.ITOps");
                         });
 

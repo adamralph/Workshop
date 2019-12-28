@@ -10,6 +10,7 @@ namespace Divergent.Shipping
     {
         public async static Task Main(string[] args)
         {
+            // TODO
             var host = new Host(ConfigurationManager.ConnectionStrings[Host.EndpointName].ToString());
 
             // pass this command line option to run as a windows service

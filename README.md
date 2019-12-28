@@ -1,10 +1,5 @@
 # Workshop (with examples in NServiceBus)
 
-## Prerequisites
-
-- Windows 8.1 or Windows 10
-- Visual Studio 2017 or Visual Studio 2019
-
 **Please ensure you have prepared your machine well in advance of the workshop. Your time during the workshop is valuable, and we want to use it for learning, rather than setting up machines.**
 
 If you have any difficulty preparing your machine, or following this document, please raise an issue in this repository ASAP so that we can resolve the problem before the workshop begins.
@@ -32,7 +27,7 @@ Although specific versions of the pre-requisites are mentioned here, later versi
 
 #### Visual Studio
 
-Install [Visual Studio](https://www.visualstudio.com) (Preferably 2019, but 2017 is also possible. Either Community, Professional, or Enterprise) with the following workloads:
+Install [Visual Studio 2017](https://www.visualstudio.com) (Community, Professional, or Enterprise) with the following workloads:
   - .NET desktop development
   - ASP.NET and web development
 
@@ -40,13 +35,10 @@ If you are not running the latest version of Visual Studio 2017, you may need to
  
 #### LocalDB
 
-* Visit the [SQL Server 2017 Express Edition](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express) website.
-* Scroll down to the title "Choose which SQL Server 2017 Express to download"
-* Select "SQL Server 2017 Express LocalDB"
-* Download and run `SQLServer2016-SSEI-Expr.exe` from the download location
+* Download and run the [SQL Server 2017 Express installer](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express)
 * In the installer, select the "Download Media" option
-* Select "LocalDB", let the installer download it and the press the "Open folder" button
-* Run `SqlLocalDB.msi`
+* Under "WHICH PACKAGE WOULD YOU LIKE TO DOWNLOAD?", select LocalDB
+* Download and run `SqlLocalDB.msi` from the download location
 
 #### SQLCMD
 
@@ -84,10 +76,7 @@ TIP: For a faster build, specify the `--parallel` (or `-p`) option to build all 
 
 Before running an exercise solution, you need to set the startup projects.
 
-One way to do this is to use the *SwitchStartupProject* Visual Studio extension. After installing the extension, open the exercise solution and choose the "Exercise" startup configuration.
-
-- [SwitchStartupProject](https://marketplace.visualstudio.com/items?itemName=vs-publisher-141975.SwitchStartupProjectforVS2017) for Visual Studio 2017
-- [SwitchStartupProject](https://marketplace.visualstudio.com/items?itemName=vs-publisher-141975.SwitchStartupProjectForVS2019) for Visual Studio 2019
+One way to do this is to use the [SwitchStartupProject](https://marketplace.visualstudio.com/items?itemName=vs-publisher-141975.SwitchStartupProjectforVS2017) Visual Studio extension. After installing the extension, open the exercise solution and choose the "Exercise" startup configuration.
 
 The startup projects are also listed in the instructions for each exercise. If you need to, you can configure them manually:
 
